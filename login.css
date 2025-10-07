@@ -1,9 +1,9 @@
-/* Reset & font */
+/* Reset & Font */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif; 
 }
 
 body {
@@ -11,98 +11,178 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  background-color: #f7f7f7; /* Background di luar area desain */
+  overflow: hidden; 
+  position: relative;
 }
 
-/* Container & Card */
-.container {
+/* Wrapper Utama (Mimic the rounded corners of the overall design) */
+.main-design-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ffffff; /* Warna dasar putih */
+  /* Sudut membulat di seluruh layar, bisa dihilangkan jika tidak perlu */
+  /* border-radius: 20px; 
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); */
+}
+
+/* Latar Belakang Melengkung (Bagian Hitam di Kanan) */
+/* login.css */
+.background-shape {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%; 
+  height: 100%;
+  background-color: #1a1a1a;
+  z-index: 0;
+
+  /* HAPUS: border-bottom-left-radius: 80% 50%; */
+  /* HAPUS: border-top-left-radius: 60% 50%; */
+
+  /* TAMBAHKAN: Bentuk Wavy (Bergelombang) menggunakan clip-path */
+  clip-path: polygon(
+    0 0,           /* Kiri Atas */
+    100% 0,        /* Kanan Atas */
+    100% 100%,     /* Kanan Bawah */
+    0 100%,        /* Kiri Bawah */
+    35% 85%,       /* Titik 1: lekukan bawah */
+    10% 65%,       /* Titik 2: lekukan tengah bawah */
+    30% 40%,       /* Titik 3: lekukan tengah */
+    5% 20%         /* Titik 4: lekukan atas */
+  );
+  
+  /* Atur origin clip-path agar tampak melengkung dari tepi kanan */
+  transform: translateX(45%); 
+}
+
+
+/* Container & Card */
+.container {
+  position: relative; 
+  z-index: 1; /* Pastikan kartu login di atas semua background */
 }
 
 .login-card {
-  background: #fff;
-  width: 350px;
-  padding: 30px 25px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background: #fff; 
+  width: 380px;
+  padding: 35px 30px; 
+  border-radius: 15px; /* Sudut lebih kecil agar tampak lebih formal */
+  /* Shadow yang lembut */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
   text-align: center;
   transition: transform 0.3s ease;
 }
 
-.login-card:hover {
-  transform: translateY(-3px);
-}
-
-h1 {
-  font-size: 1.6rem;
+/* Header dan Teks */
+.dark-header {
+  font-size: 1.8rem;
   margin-bottom: 5px;
-  color: #333;
+  color: #1a1a1a; /* Warna Hitam pekat */
+  font-weight: 700;
 }
 
 .subtitle {
-  font-size: 0.9rem;
-  color: #777;
-  margin-bottom: 25px;
+  font-size: 0.95rem;
+  color: #6c757d; 
+  margin-bottom: 30px;
 }
 
 /* Form Elements */
 .form-group {
   text-align: left;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 label {
   font-weight: 600;
   font-size: 0.9rem;
-  color: #444;
+  color: #495057;
   display: block;
   margin-bottom: 5px;
 }
 
 input {
   width: 100%;
-  padding: 10px 12px;
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
-  font-size: 0.95rem;
+  padding: 12px 15px; 
+  background: #f8f9fa; 
+  border: 1px solid #ced4da; 
+  border-radius: 8px; 
+  font-size: 1rem;
+  color: #343a40; 
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder {
+  color: #adb5bd; 
 }
 
 input:focus {
-  border-color: #ff7b54;
+  border-color: #1a1a1a; /* Fokus ke warna hitam */
+  box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1); 
+  background: #fff;
 }
 
-/* Button */
+/* Button (Dibuat Dark untuk Kontras) */
 button {
   width: 100%;
-  background: #ff7b54;
+  background: #1a1a1a; /* Warna Hitam/Gelap */
   color: white;
-  padding: 12px;
+  padding: 14px 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 8px; 
   font-weight: 600;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s;
+  font-size: 1.05rem;
+  box-shadow: 0 6px 15px rgba(26, 26, 26, 0.3); 
+  transition: background 0.3s, transform 0.1s, box-shadow 0.3s;
 }
 
 button:hover {
-  background: #ff6333;
+  background: #333333; /* Sedikit lebih terang saat hover */
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(26, 26, 26, 0.4); 
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 /* Message */
 #message {
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 0.9rem;
 }
 
+/* Warna Pesan */
+#message[style*="color: red"] {
+  color: #dc3545 !important;
+}
+
+#message[style*="color: green"] {
+  color: #28a745 !important;
+}
+
 /* Responsive */
-@media (max-width: 400px) {
+@media (max-width: 768px) {
+  .background-shape {
+    /* Sembunyikan shape hitam atau buat lebih kecil di layar kecil */
+    width: 100%;
+    border-radius: 0;
+    height: 30%;
+    top: auto;
+    bottom: 0;
+  }
   .login-card {
     width: 90%;
-    padding: 25px 15px;
+    padding: 30px 20px;
   }
 }
