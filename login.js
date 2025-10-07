@@ -12,16 +12,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
   loginBtn.disabled = true;
 
   try {
-    // Cek kredensial test lokal dulu
-    if (username === "goty" && password === "ekspedisi33") {
-      message.style.color = "green";
-      message.textContent = "✅ Login berhasil (test user)!";
-      localStorage.setItem("firstName", "Goty");
-      setTimeout(() => (window.location.href = "recipes.html"), 1000);
-      return;
-    }
-
-    // Jika bukan test user, lanjut cek ke API
+    // Cek User ke API
     const res = await fetch("https://dummyjson.com/users");
     if (!res.ok) throw new Error("Gagal terhubung ke server!");
     const data = await res.json();

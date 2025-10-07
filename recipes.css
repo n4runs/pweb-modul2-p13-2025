@@ -1,0 +1,376 @@
+/* Reset & Font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* ============================================
+   NAVIGATION BAR
+   ============================================ */
+nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+#greeting {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+#logoutBtn {
+  background: #ff7b54;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+#logoutBtn:hover {
+  background: #ff6333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 123, 84, 0.3);
+}
+
+/* ============================================
+   CONTROLS SECTION (Search & Filter)
+   ============================================ */
+.controls {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+#searchInput {
+  flex: 1;
+  min-width: 250px;
+  padding: 12px 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+  border-color: #ff7b54;
+  background: white;
+  box-shadow: 0 4px 15px rgba(255, 123, 84, 0.2);
+}
+
+#filterCuisine {
+  padding: 12px 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  outline: none;
+  min-width: 180px;
+  transition: all 0.3s ease;
+}
+
+#filterCuisine:focus {
+  border-color: #ff7b54;
+  background: white;
+}
+
+/* ============================================
+   RECIPES CONTAINER & CARDS
+   ============================================ */
+#recipesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.recipe-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.recipe-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.recipe-card h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+/* ============================================
+   RECIPE META INFO
+   ============================================ */
+.recipe-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Difficulty Badge */
+.difficulty {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.difficulty.Easy {
+  background: #d4edda;
+  color: #155724;
+}
+
+.difficulty.Medium {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.difficulty.Hard {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Rating Stars */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1rem;
+}
+
+.rating-value {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Ingredients Preview */
+.ingredients-preview {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* View Recipe Button */
+.view-btn {
+  width: 100%;
+  background: #ff7b54;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+
+.view-btn:hover {
+  background: #ff6333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 123, 84, 0.3);
+}
+
+/* ============================================
+   SHOW MORE BUTTON
+   ============================================ */
+#showMoreBtn {
+  display: block;
+  margin: 30px auto;
+  padding: 15px 40px;
+  background: white;
+  color: #ff7b54;
+  border: 2px solid #ff7b54;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#showMoreBtn:hover {
+  background: #ff7b54;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 123, 84, 0.3);
+}
+
+/* ============================================
+   MESSAGES & ERRORS
+   ============================================ */
+.message {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.1rem;
+  color: white;
+}
+
+.error-message {
+  background: rgba(255, 107, 107, 0.9);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* ============================================
+   MODAL STYLES
+   ============================================ */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: sticky;
+  top: 10px;
+  right: 10px;
+  float: right;
+  background: #ff7b54;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #ff6333;
+  transform: rotate(90deg);
+}
+
+.modal-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-body {
+  padding: 30px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+  nav {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  #searchInput,
+  #filterCuisine {
+    width: 100%;
+  }
+
+  #recipesContainer {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .modal-image {
+    height: 250px;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+}
