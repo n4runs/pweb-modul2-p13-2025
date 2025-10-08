@@ -100,93 +100,185 @@ cookedBtn.addEventListener("click", () => {
 });
 
 function showWishlistModal() {
-  if (wishlist.length === 0) {
-    alert("Your wishlist is empty! Click ❤️ on recipe cards to add them.");
-    return;
-  }
-
   const modal = document.createElement("div");
   modal.className = "modal-overlay";
-  modal.innerHTML = `
-    <div class="modal-content">
-      <button class="modal-close" id="closeModal">✕</button>
-      <div class="modal-body">
-        <h2 style="font-size: 2rem; margin-bottom: 20px; color: var(--text-primary); text-align: center;">
-          ❤️ My Wishlist (${wishlist.length})
-        </h2>
-        <div style="display: grid; gap: 15px;">
-          ${wishlist.map(recipe => `
-            <div style="display: flex; gap: 15px; padding: 15px; background: var(--meta-bg); border-radius: 12px; align-items: center;">
-              <img src="${recipe.image}" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
-              <div style="flex: 1;">
-                <h4 style="color: var(--text-primary); margin-bottom: 5px;">${recipe.name}</h4>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">${recipe.cuisine} • ${recipe.cookTimeMinutes} min</p>
-              </div>
-              <button onclick="removeFromWishlist(${recipe.id})" style="background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">
-                Remove
-              </button>
-            </div>
-          `).join('')}
+  
+  if (wishlist.length === 0) {
+    modal.innerHTML = `
+      <div class="modal-content">
+        <button class="modal-close" id="closeModal">✕</button>
+        <div class="modal-body">
+          <div style="text-align: center; padding: 40px 20px;">
+            <div style="font-size: 4rem; margin-bottom: 20px;">❤️</div>
+            <h2 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--text-primary);">
+              Your Wishlist is Empty
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.6;">
+              Start exploring delicious recipes and click the ❤️ button<br>
+              to add them to your wishlist!
+            </p>
+            <button onclick="closeModalAndExplore()" style="
+              background: var(--primary-color);
+              color: white;
+              border: none;
+              padding: 12px 30px;
+              border-radius: 10px;
+              font-weight: 600;
+              cursor: pointer;
+              font-size: 1rem;
+              transition: all 0.3s ease;
+            ">
+              🍳 Explore Recipes
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  `;
+    `;
+  } else {
+    modal.innerHTML = `
+      <div class="modal-content">
+        <button class="modal-close" id="closeModal">✕</button>
+        <div class="modal-body">
+          <h2 style="font-size: 2rem; margin-bottom: 20px; color: var(--text-primary); text-align: center;">
+            ❤️ My Wishlist (${wishlist.length})
+          </h2>
+          <div style="display: grid; gap: 15px;">
+            ${wishlist.map(recipe => `
+              <div style="display: flex; gap: 15px; padding: 15px; background: var(--meta-bg); border-radius: 12px; align-items: center;">
+                <img src="${recipe.image}" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
+                <div style="flex: 1;">
+                  <h4 style="color: var(--text-primary); margin-bottom: 5px;">${recipe.name}</h4>
+                  <p style="color: var(--text-secondary); font-size: 0.9rem;">${recipe.cuisine} • ${recipe.cookTimeMinutes} min</p>
+                </div>
+                <button onclick="removeFromWishlist(${recipe.id})" style="
+                  background: #ff6b6b; 
+                  color: white; 
+                  border: none; 
+                  padding: 8px 16px; 
+                  border-radius: 8px; 
+                  cursor: pointer;
+                  font-weight: 600;
+                  transition: all 0.3s ease;
+                ">
+                  Remove
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
 
   document.body.appendChild(modal);
+  
   document.getElementById("closeModal").addEventListener("click", () => {
     document.body.removeChild(modal);
   });
+  
   modal.addEventListener("click", (e) => {
     if (e.target === modal) document.body.removeChild(modal);
   });
 }
 
 function showCookedModal() {
-  if (haveCooked.length === 0) {
-    alert("You haven't cooked any recipes yet! Click ✅ on recipe cards after cooking.");
-    return;
-  }
-
   const modal = document.createElement("div");
   modal.className = "modal-overlay";
-  modal.innerHTML = `
-    <div class="modal-content">
-      <button class="modal-close" id="closeModal">✕</button>
-      <div class="modal-body">
-        <h2 style="font-size: 2rem; margin-bottom: 20px; color: var(--text-primary); text-align: center;">
-          ✅ Have Cooked (${haveCooked.length})
-        </h2>
-        <div style="display: grid; gap: 15px;">
-          ${haveCooked.map(recipe => `
-            <div style="display: flex; gap: 15px; padding: 15px; background: var(--meta-bg); border-radius: 12px; align-items: center;">
-              <img src="${recipe.image}" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
-              <div style="flex: 1;">
-                <h4 style="color: var(--text-primary); margin-bottom: 5px;">${recipe.name}</h4>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">${recipe.cuisine} • ${recipe.cookTimeMinutes} min</p>
-              </div>
-              <button onclick="removeFromCooked(${recipe.id})" style="background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">
-                Remove
-              </button>
-            </div>
-          `).join('')}
+  
+  if (haveCooked.length === 0) {
+    modal.innerHTML = `
+      <div class="modal-content">
+        <button class="modal-close" id="closeModal">✕</button>
+        <div class="modal-body">
+          <div style="text-align: center; padding: 40px 20px;">
+            <div style="font-size: 4rem; margin-bottom: 20px;">👨‍🍳</div>
+            <h2 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--text-primary);">
+              No Recipes Cooked Yet
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.6;">
+              Cook some delicious recipes and click the ✅ button<br>
+              to track your cooking achievements!
+            </p>
+            <button onclick="closeModalAndExplore()" style="
+              background: var(--primary-color);
+              color: white;
+              border: none;
+              padding: 12px 30px;
+              border-radius: 10px;
+              font-weight: 600;
+              cursor: pointer;
+              font-size: 1rem;
+              transition: all 0.3s ease;
+            ">
+              🍽️ Start Cooking
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  `;
+    `;
+  } else {
+    modal.innerHTML = `
+      <div class="modal-content">
+        <button class="modal-close" id="closeModal">✕</button>
+        <div class="modal-body">
+          <h2 style="font-size: 2rem; margin-bottom: 20px; color: var(--text-primary); text-align: center;">
+            ✅ Have Cooked (${haveCooked.length})
+          </h2>
+          <div style="display: grid; gap: 15px;">
+            ${haveCooked.map(recipe => `
+              <div style="display: flex; gap: 15px; padding: 15px; background: var(--meta-bg); border-radius: 12px; align-items: center;">
+                <img src="${recipe.image}" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
+                <div style="flex: 1;">
+                  <h4 style="color: var(--text-primary); margin-bottom: 5px;">${recipe.name}</h4>
+                  <p style="color: var(--text-secondary); font-size: 0.9rem;">${recipe.cuisine} • ${recipe.cookTimeMinutes} min</p>
+                </div>
+                <button onclick="removeFromCooked(${recipe.id})" style="
+                  background: #ff6b6b; 
+                  color: white; 
+                  border: none; 
+                  padding: 8px 16px; 
+                  border-radius: 8px; 
+                  cursor: pointer;
+                  font-weight: 600;
+                  transition: all 0.3s ease;
+                ">
+                  Remove
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
 
   document.body.appendChild(modal);
+  
   document.getElementById("closeModal").addEventListener("click", () => {
     document.body.removeChild(modal);
   });
+  
   modal.addEventListener("click", (e) => {
     if (e.target === modal) document.body.removeChild(modal);
   });
 }
 
+// Tambahkan fungsi untuk close modal dan scroll ke recipes
+window.closeModalAndExplore = function() {
+  const modal = document.querySelector(".modal-overlay");
+  if (modal) document.body.removeChild(modal);
+  
+  // Smooth scroll ke recipes section
+  document.getElementById('recipesContainer').scrollIntoView({ 
+    behavior: 'smooth' 
+  });
+};
+
 // Global functions untuk remove (dipanggil dari modal)
 window.removeFromWishlist = function(recipeId) {
   wishlist = wishlist.filter(r => r.id !== recipeId);
   updateCounters();
+  updateCardButtons(recipeId);
   const modal = document.querySelector(".modal-overlay");
   if (modal) document.body.removeChild(modal);
   if (wishlist.length > 0) showWishlistModal();
@@ -195,6 +287,7 @@ window.removeFromWishlist = function(recipeId) {
 window.removeFromCooked = function(recipeId) {
   haveCooked = haveCooked.filter(r => r.id !== recipeId);
   updateCounters();
+  updateCardButtons(recipeId);
   const modal = document.querySelector(".modal-overlay");
   if (modal) document.body.removeChild(modal);
   if (haveCooked.length > 0) showCookedModal();
@@ -609,8 +702,33 @@ brandElement.addEventListener('click', () => {
   });
 });
 
+// ============================================ 
+// 19. UPDATE CARD BUTTONS AFTER REMOVE
 // ============================================
-// 19. INITIALIZE APP
+function updateCardButtons(recipeId) {
+  // Cari card yang sesuai dengan recipeId
+  const cards = document.querySelectorAll('.recipe-card');
+  
+  cards.forEach(card => {
+    const wishlistBtn = card.querySelector('.wishlist-btn');
+    const cookedBtn = card.querySelector('.cooked-btn');
+    
+    if (wishlistBtn && parseInt(wishlistBtn.dataset.id) === recipeId) {
+      const isInWishlist = wishlist.some(r => r.id === recipeId);
+      wishlistBtn.style.background = isInWishlist ? '#ff6b6b' : 'rgba(255, 255, 255, 0.9)';
+      wishlistBtn.style.color = isInWishlist ? 'white' : '#ff6b6b';
+    }
+    
+    if (cookedBtn && parseInt(cookedBtn.dataset.id) === recipeId) {
+      const isCooked = haveCooked.some(r => r.id === recipeId);
+      cookedBtn.style.background = isCooked ? '#4caf50' : 'rgba(255, 255, 255, 0.9)';
+      cookedBtn.style.color = isCooked ? 'white' : '#4caf50';
+    }
+  });
+}
+
+// ============================================
+// 20. INITIALIZE APP
 // ============================================
 initDarkMode();
 updateCounters();

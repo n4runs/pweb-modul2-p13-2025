@@ -745,7 +745,7 @@ body.dark-mode .dark-mode-toggle::after {
 
 .recipe-modal {
   background: var(--card-bg);
-  border-radius: 18px; /* KEMBALIKAN border-radius di sini */
+  border-radius: 18px;
   width: 85%;
   max-width: 750px;
   max-height: 90vh;
@@ -756,7 +756,6 @@ body.dark-mode .dark-mode-toggle::after {
   position: relative;
 }
 
-/* PERBAIKAN: Gambar menempel sempurna di atas TAPI dengan border radius atas */
 .modal-image {
   width: 100%;
   height: 350px;
@@ -767,12 +766,12 @@ body.dark-mode .dark-mode-toggle::after {
   padding: 0;
 }
 
-/* PERBAIKAN: Konten dengan border radius hanya di bawah */
 .modal-body {
   padding: 28px 36px;
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 28px;
+  border-radius: 0 0 18px 18px; /* Radius hanya di bawah */
   background: var(--card-bg);
 }
 
@@ -836,7 +835,6 @@ body.dark-mode .dark-mode-toggle::after {
   font-weight: 600;
 }
 
-/* PERBAIKAN: Tombol close yang sticky */
 .modal-close {
   position: sticky;
   top: 15px;
@@ -853,8 +851,8 @@ body.dark-mode .dark-mode-toggle::after {
   font-size: 1.2rem;
   box-shadow: 0 4px 12px rgba(255, 123, 84, 0.4);
   transition: all 0.3s ease;
-  margin-top: -370px; /* Sesuaikan dengan tinggi gambar + sedikit margin */
-  margin-bottom: 350px; /* Kompensasi untuk positioning */
+  margin-top: -370px; 
+  margin-bottom: 350px; 
 }
 
 .modal-close:hover {
@@ -862,14 +860,12 @@ body.dark-mode .dark-mode-toggle::after {
   transform: scale(1.1);
 }
 
-/* PERBAIKAN: Container untuk gambar dan tombol close */
 .image-container {
   position: relative;
   border-radius: 18px 18px 0 0;
   overflow: hidden;
 }
 
-/* Scrollbar styling */
 .recipe-modal::-webkit-scrollbar {
   width: 8px;
 }
@@ -882,79 +878,411 @@ body.dark-mode .dark-mode-toggle::after {
 }
 
 /* ============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - FIXED BREAKPOINTS
    ============================================ */
-@media (max-width: 968px) {
+
+/* TABLET: 400px - 799px */
+@media (max-width: 799px) {
   nav {
-    padding: 15px 20px;
+    padding: 12px 15px;
+    flex-wrap: wrap;
+    gap: 10px;
   }
-
+  
   .nav-left {
-    gap: 15px;
+    flex: 1;
+    min-width: auto;
   }
-
+  
   .nav-right {
-    gap: 8px;
+    flex: 2;
+    justify-content: flex-end;
+    min-width: auto;
   }
-
+  
+  .brand {
+    font-size: 1.3rem;
+  }
+  
   .menu-text {
-    display: none;
+    display: inline;
   }
-
-  .nav-menu-item {
-    padding: 10px 12px;
-  }
-
+  
   #greeting {
-    font-size: 0.95rem;
+    font-size: 1rem;
+    margin-left: 10px;
   }
-
-  .scroll-top-btn {
-    bottom: 20px;
-    right: 20px;
+  
+  .controls {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 0 15px;
+    flex-direction: row;
+    gap: 12px;
+  }
+  
+  .search-wrapper {
+    flex: 2;
+  }
+  
+  #filterCuisine {
+    flex: 1;
+    min-width: 140px;
+  }
+  
+  #recipesContainer {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    padding: 10px;
+    max-width: 95%;
+  }
+  
+  .recipe-card-image-wrapper {
+    height: 200px;
+  }
+  
+  .recipe-content {
+    padding: 16px;
+  }
+  
+  .recipe-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  /* Modal Tablet */
+  .modal-overlay {
+    padding: 20px;
+  }
+  
+  .recipe-modal {
+    width: 90%;
+  }
+  
+  .modal-body {
+    padding: 20px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .modal-image {
+    height: 250px;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
   }
 }
 
-@media (max-width: 768px) {
+/* MOBILE: 399px kebawah */
+@media (max-width: 399px) {
   nav {
+    padding: 8px 10px;
     flex-direction: column;
-    gap: 15px;
-    padding: 15px;
+    gap: 8px;
   }
-
-  .nav-left,
+  
+  .nav-left, 
   .nav-right {
     width: 100%;
     justify-content: space-between;
   }
-
+  
   .brand {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
-
+  
+  .brand-icon {
+    font-size: 1.4rem;
+  }
+  
+  #greeting {
+    font-size: 0.9rem;
+    margin-left: 8px;
+  }
+  
+  .menu-text {
+    display: none;
+  }
+  
+  .nav-menu-item {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+  
+  .menu-badge {
+    font-size: 0.7rem;
+    padding: 1px 5px;
+  }
+  
+  .dark-mode-toggle {
+    width: 48px;
+    height: 26px;
+  }
+  
+  .dark-mode-toggle::after {
+    width: 18px;
+    height: 18px;
+  }
+  
+  body.dark-mode .dark-mode-toggle::after {
+    transform: translateX(22px);
+  }
+  
+  #logoutBtn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
   .controls {
     flex-direction: column;
+    gap: 8px;
+    margin: 15px auto;
+    padding: 0 10px;
   }
-
-  #searchInput,
+  
+  .search-wrapper,
   #filterCuisine {
     width: 100%;
   }
-
+  
+  #searchInput,
+  #filterCuisine {
+    padding: 10px 12px 10px 35px;
+    font-size: 0.85rem;
+  }
+  
+  .search-icon {
+    left: 10px;
+    font-size: 0.9rem;
+  }
+  
   #recipesContainer {
     grid-template-columns: 1fr;
-    padding: 15px;
+    gap: 12px;
+    padding: 5px;
+    max-width: 100%;
   }
-
+  
+  .recipe-card {
+    margin: 0 2px;
+    border-radius: 12px;
+  }
+  
+  .recipe-card-image-wrapper {
+    height: 160px;
+  }
+  
+  .recipe-content {
+    padding: 12px;
+  }
+  
+  .recipe-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  
+  .recipe-header {
+    margin-bottom: 8px;
+  }
+  
+  .difficulty {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+  
+  .stars {
+    font-size: 0.8rem;
+  }
+  
+  .rating-value {
+    font-size: 0.75rem;
+  }
+  
+  .recipe-meta {
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .meta-item {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+  
+  .ingredients-preview {
+    font-size: 0.75rem;
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .view-btn {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+  
+  /* Wishlist & Cooked Buttons */
+  .wishlist-btn,
+  .cooked-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  /* Modal Mobile */
+  .modal-overlay {
+    padding: 5px;
+  }
+  
+  .recipe-modal {
+    width: 98%;
+    max-height: 98vh;
+  }
+  
   .modal-image {
-    height: 250px;
+    height: 160px;
+    border-radius: 10px 10px 0 0;
   }
-
+  
   .modal-body {
-    padding: 20px;
+    padding: 15px;
+    gap: 15px;
   }
+  
+  .modal-title {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+  
+  .recipe-info {
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .recipe-info span {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+  
+  .ingredients-list,
+  .instructions-list {
+    padding: 10px 12px;
+    font-size: 0.75rem;
+    margin-left: -5px;
+    width: calc(100% + 5px);
+  }
+  
+  .ingredients-list li,
+  .instructions-list li {
+    margin-bottom: 4px;
+  }
+  
+  .tags {
+    gap: 4px;
+    margin-top: 8px;
+  }
+  
+  .tag {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+  
+  .modal-close {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+    top: 5px;
+    right: 5px;
+  }
+  
+  /* Show More Button */
+  #showMoreBtn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    margin: 20px auto;
+  }
+  
+  .scroll-top-btn {
+    bottom: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}
 
-  .menu-text {
-    display: inline;
+/* VERY SMALL MOBILE: 320px kebawah */
+@media (max-width: 320px) {
+  .brand {
+    font-size: 1rem;
+  }
+  
+  #greeting {
+    font-size: 0.8rem;
+  }
+  
+  .nav-menu-item {
+    padding: 5px 6px;
+  }
+  
+  .controls {
+    padding: 0 5px;
+  }
+  
+  #searchInput,
+  #filterCuisine {
+    padding: 8px 10px 8px 30px;
+    font-size: 0.8rem;
+  }
+  
+  .search-icon {
+    left: 8px;
+  }
+  
+  #recipesContainer {
+    padding: 2px;
+  }
+  
+  .recipe-card {
+    margin: 0 1px;
+  }
+  
+  .recipe-card-image-wrapper {
+    height: 140px;
+  }
+  
+  .recipe-content {
+    padding: 10px;
+  }
+  
+  .modal-image {
+    height: 140px;
+  }
+  
+  .modal-body {
+    padding: 12px;
+  }
+}
+
+/* Fix untuk touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .view-btn,
+  .nav-menu-item,
+  .modal-close,
+  .wishlist-btn,
+  .cooked-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Hilangkan hover effects di mobile */
+  .recipe-card:hover {
+    transform: none;
+  }
+  
+  .nav-menu-item:hover {
+    transform: none;
+    border-color: var(--border-color);
   }
 }
