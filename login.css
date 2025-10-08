@@ -7,82 +7,44 @@
 }
 
 body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f7f7; /* Background di luar area desain */
-  overflow: hidden; 
-  position: relative;
-}
-
-/* Wrapper Utama (Mimic the rounded corners of the overall design) */
-.main-design-wrapper {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff; /* Warna dasar putih */
-  /* Sudut membulat di seluruh layar, bisa dihilangkan jika tidak perlu */
-  /* border-radius: 20px; 
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); */
-}
-
-/* Latar Belakang Melengkung (Bagian Hitam di Kanan) */
-/* login.css */
-.background-shape {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 55%; 
-  height: 100%;
-  background-color: #1a1a1a;
-  z-index: 0;
-
-  /* HAPUS: border-bottom-left-radius: 80% 50%; */
-  /* HAPUS: border-top-left-radius: 60% 50%; */
-
-  /* TAMBAHKAN: Bentuk Wavy (Bergelombang) menggunakan clip-path */
-  clip-path: polygon(
-    0 0,           /* Kiri Atas */
-    100% 0,        /* Kanan Atas */
-    100% 100%,     /* Kanan Bawah */
-    0 100%,        /* Kiri Bawah */
-    35% 85%,       /* Titik 1: lekukan bawah */
-    10% 65%,       /* Titik 2: lekukan tengah bawah */
-    30% 40%,       /* Titik 3: lekukan tengah */
-    5% 20%         /* Titik 4: lekukan atas */
-  );
+  /* Pengaturan background image */
+  background-image: url('background-food.jpg'); /* Nama file gambar Anda */
+  background-size: cover; /* Agar gambar menutupi seluruh layar */
+  background-position: center; /* Posisi gambar di tengah */
+  background-repeat: no-repeat; /* Jangan ulangi gambar */
   
-  /* Atur origin clip-path agar tampak melengkung dari tepi kanan */
-  transform: translateX(45%); 
+  /* Sisanya untuk layout */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
 }
-
 
 /* Container & Card */
 .container {
   position: relative; 
-  z-index: 1; /* Pastikan kartu login di atas semua background */
+  z-index: 1;
 }
 
 .login-card {
-  background: #fff; 
+  /* Beri sedikit transparansi agar lebih menyatu dengan background */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px); /* Efek blur (opsional, tapi keren) */
+  
   width: 380px;
   padding: 35px 30px; 
-  border-radius: 15px; /* Sudut lebih kecil agar tampak lebih formal */
-  /* Shadow yang lembut */
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
   text-align: center;
-  transition: transform 0.3s ease;
 }
 
-/* Header dan Teks */
+/* Sisa dari CSS (form, button, text, dll.) tetap sama */
 .dark-header {
   font-size: 1.8rem;
   margin-bottom: 5px;
-  color: #1a1a1a; /* Warna Hitam pekat */
+  color: #1a1a1a;
   font-weight: 700;
 }
 
@@ -92,7 +54,6 @@ body {
   margin-bottom: 30px;
 }
 
-/* Form Elements */
 .form-group {
   text-align: left;
   margin-bottom: 20px;
@@ -118,20 +79,15 @@ input {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-input::placeholder {
-  color: #adb5bd; 
-}
-
 input:focus {
-  border-color: #1a1a1a; /* Fokus ke warna hitam */
+  border-color: #1a1a1a;
   box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1); 
   background: #fff;
 }
 
-/* Button (Dibuat Dark untuk Kontras) */
 button {
   width: 100%;
-  background: #1a1a1a; /* Warna Hitam/Gelap */
+  background: #1a1a1a;
   color: white;
   padding: 14px 15px;
   border: none;
@@ -139,50 +95,22 @@ button {
   font-weight: 600;
   cursor: pointer;
   font-size: 1.05rem;
-  box-shadow: 0 6px 15px rgba(26, 26, 26, 0.3); 
-  transition: background 0.3s, transform 0.1s, box-shadow 0.3s;
+  transition: background 0.3s, transform 0.1s;
 }
 
 button:hover {
-  background: #333333; /* Sedikit lebih terang saat hover */
+  background: #333333;
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(26, 26, 26, 0.4); 
 }
 
 button:disabled {
   background: #ccc;
   cursor: not-allowed;
-  box-shadow: none;
   transform: none;
 }
 
-/* Message */
 #message {
   margin-top: 20px;
   font-size: 0.9rem;
-}
-
-/* Warna Pesan */
-#message[style*="color: red"] {
-  color: #dc3545 !important;
-}
-
-#message[style*="color: green"] {
-  color: #28a745 !important;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .background-shape {
-    /* Sembunyikan shape hitam atau buat lebih kecil di layar kecil */
-    width: 100%;
-    border-radius: 0;
-    height: 30%;
-    top: auto;
-    bottom: 0;
-  }
-  .login-card {
-    width: 90%;
-    padding: 30px 20px;
-  }
+  font-weight: 600;
 }
