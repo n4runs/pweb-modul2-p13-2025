@@ -542,46 +542,32 @@ function showRecipeModal(recipe) {
   modal.className = "modal-overlay";
 
   modal.innerHTML = `
-    <div class="modal-content">
+    <div class="modal-content recipe-modal">
       <button class="modal-close" id="closeModal">✕</button>
-      
       <img src="${recipe.image}" alt="${recipe.name}" class="modal-image">
-      
       <div class="modal-body">
-        <h2 style="font-size: 2rem; margin-bottom: 20px; color: var(--text-primary); text-align: center;">
-          ${recipe.name}
-        </h2>
-        
-        <div style="text-align: center; padding: 40px; color: var(--text-secondary); background: var(--meta-bg); border-radius: 10px;">
-          <p style="font-size: 1.3rem; margin-bottom: 15px;">🚧 Detail Resep Sedang Dikembangkan 🚧</p>
-          <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px;">
-            Bagian ini akan diisi oleh teman Anda dengan tampilan yang lebih lengkap dan menarik:
-          </p>
-          <div style="text-align: left; max-width: 500px; margin: 0 auto;">
-            <p style="margin-bottom: 8px;">✓ Rating & Difficulty Badge</p>
-            <p style="margin-bottom: 8px;">✓ Info Lengkap (Cuisine, Waktu Memasak, Servings, Kalori)</p>
-            <p style="margin-bottom: 8px;">✓ Daftar Ingredients yang lengkap</p>
-            <p style="margin-bottom: 8px;">✓ Langkah-langkah Instructions step by step</p>
-            <p style="margin-bottom: 8px;">✓ Tags Resep dengan styling menarik</p>
-          </div>
+        <h2 class="modal-title">${recipe.name}</h2>
+
+        <div class="recipe-info">
+          <span class="badge difficulty">${recipe.difficulty}</span>
+          <span>⭐ ${recipe.rating.toFixed(1)}</span>
+          <span>🍽️ ${recipe.cuisine}</span>
+          <span>⏱️ ${recipe.cookTimeMinutes} min</span>
+          <span>🔥 ${recipe.caloriesPerServing} kcal</span>
         </div>
-        
-        <div style="background: rgba(255, 123, 84, 0.1); padding: 15px; border-radius: 10px; margin-top: 20px; border-left: 4px solid var(--primary-color);">
-          <p style="font-size: 0.9rem; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;">
-            📊 Preview Data Tersedia:
-          </p>
-          <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.8;">
-            <strong>Rating:</strong> ${recipe.rating} ⭐<br>
-            <strong>Difficulty:</strong> ${recipe.difficulty}<br>
-            <strong>Cuisine:</strong> ${recipe.cuisine}<br>
-            <strong>Cook Time:</strong> ${recipe.cookTimeMinutes} minutes<br>
-            <strong>Prep Time:</strong> ${recipe.prepTimeMinutes} minutes<br>
-            <strong>Servings:</strong> ${recipe.servings} people<br>
-            <strong>Calories:</strong> ${recipe.caloriesPerServing} per serving<br>
-            <strong>Ingredients:</strong> ${recipe.ingredients.length} items<br>
-            <strong>Instructions:</strong> ${recipe.instructions.length} steps<br>
-            <strong>Tags:</strong> ${recipe.tags.join(", ")}
-          </p>
+
+        <h3>🧂 Ingredients</h3>
+        <ul class="ingredients-list">
+          ${recipe.ingredients.map(i => `<li>${i}</li>`).join("")}
+        </ul>
+
+        <h3>👨‍🍳 Instructions</h3>
+        <ol class="instructions-list">
+          ${recipe.instructions.map(step => `<li>${step}</li>`).join("")}
+        </ol>
+
+        <div class="tags">
+          ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
         </div>
       </div>
     </div>
@@ -593,11 +579,8 @@ function showRecipeModal(recipe) {
   closeBtn.addEventListener("click", () => {
     document.body.removeChild(modal);
   });
-
   modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      document.body.removeChild(modal);
-    }
+    if (e.target === modal) document.body.removeChild(modal);
   });
 }
 

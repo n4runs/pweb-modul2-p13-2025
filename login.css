@@ -8,7 +8,7 @@
 
 body {
   /* Pengaturan background image */
-  background-image: url('background-food.jpg'); /* Nama file gambar Anda */
+  background-image: url('assets/background-food.jpg'); /* Nama file gambar Anda */
   background-size: cover; /* Agar gambar menutupi seluruh layar */
   background-position: center; /* Posisi gambar di tengah */
   background-repeat: no-repeat; /* Jangan ulangi gambar */

@@ -728,14 +728,14 @@ body.dark-mode .dark-mode-toggle::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  padding: 20px;
-  overflow-y: auto;
+  padding: 40px;
   animation: fadeIn 0.3s ease;
+  overflow: hidden;
 }
 
 @keyframes fadeIn {
@@ -743,61 +743,142 @@ body.dark-mode .dark-mode-toggle::after {
   to { opacity: 1; }
 }
 
-.modal-content {
+.recipe-modal {
   background: var(--card-bg);
-  border-radius: 20px;
-  max-width: 800px;
-  width: 100%;
+  border-radius: 18px; /* KEMBALIKAN border-radius di sini */
+  width: 85%;
+  max-width: 750px;
   max-height: 90vh;
   overflow-y: auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 0.3s ease;
+  color: var(--text-primary);
   position: relative;
-  animation: slideUp 0.3s ease;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* PERBAIKAN: Gambar menempel sempurna di atas TAPI dengan border radius atas */
+.modal-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+  border-radius: 18px 18px 0 0; /* Radius hanya di atas */
+  margin: 0;
+  padding: 0;
 }
 
+/* PERBAIKAN: Konten dengan border radius hanya di bawah */
+.modal-body {
+  padding: 28px 36px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 28px;
+  background: var(--card-bg);
+}
+
+.modal-title {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.recipe-info {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.recipe-info span {
+  background: var(--meta-bg);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.ingredients-list,
+.instructions-list {
+  background: var(--meta-bg);
+  padding: 18px 22px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-left: -10px;
+  width: calc(100% + 10px);
+}
+
+.ingredients-list li,
+.instructions-list li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.tags {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.tag {
+  background: var(--meta-bg);
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* PERBAIKAN: Tombol close yang sticky */
 .modal-close {
   position: sticky;
-  top: 10px;
-  right: 10px;
+  top: 15px;
   float: right;
+  margin-right: 15px;
+  z-index: 20;
   background: var(--primary-color);
   color: white;
   border: none;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 1.2rem;
-  z-index: 10;
-  transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(255, 123, 84, 0.4);
+  transition: all 0.3s ease;
+  margin-top: -370px; /* Sesuaikan dengan tinggi gambar + sedikit margin */
+  margin-bottom: 350px; /* Kompensasi untuk positioning */
 }
 
 .modal-close:hover {
   background: var(--primary-hover);
-  transform: rotate(90deg) scale(1.1);
+  transform: scale(1.1);
 }
 
-.modal-image {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-  border-radius: 20px 20px 0 0;
+/* PERBAIKAN: Container untuk gambar dan tombol close */
+.image-container {
+  position: relative;
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
 }
 
-.modal-body {
-  padding: 30px;
-  color: var(--text-primary);
+/* Scrollbar styling */
+.recipe-modal::-webkit-scrollbar {
+  width: 8px;
+}
+.recipe-modal::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.25);
+  border-radius: 10px;
+}
+.recipe-modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.4);
 }
 
 /* ============================================
