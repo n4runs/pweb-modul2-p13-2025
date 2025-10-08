@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Recipes Collection</title>
+  <title>Wes Mangan - Recipe Collection</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,17 +12,49 @@
 <body>
   <!-- Navigation Bar -->
   <nav>
-    <span id="greeting"></span>
-    <button id="logoutBtn">Logout</button>
+    <div class="nav-left">
+      <div class="brand">
+        <span class="brand-icon">🍳</span>
+        <span class="brand-name">Wes Mangan</span>
+      </div>
+      <span id="greeting"></span>
+    </div>
+
+    <div class="nav-right">
+      <!-- Menu Items -->
+      <button class="nav-menu-item" id="wishlistBtn">
+        <span class="menu-icon">❤️</span>
+        <span class="menu-text">Wishlist</span>
+        <span class="menu-badge" id="wishlistCount">0</span>
+      </button>
+
+      <button class="nav-menu-item" id="cookedBtn">
+        <span class="menu-icon">✅</span>
+        <span class="menu-text">Have Cooked</span>
+        <span class="menu-badge" id="cookedCount">0</span>
+      </button>
+
+      <!-- Dark Mode Toggle -->
+      <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+      </button>
+
+      <!-- Logout Button -->
+      <button id="logoutBtn">Logout</button>
+    </div>
   </nav>
 
   <!-- Search & Filter Controls -->
   <section class="controls">
-    <input 
-      type="text" 
-      id="searchInput" 
-      placeholder="🔍 Cari resep berdasarkan nama, cuisine, ingredients, atau tags..."
-    >
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Cari resep berdasarkan nama, cuisine, ingredients, atau tags..."
+      >
+    </div>
     <select id="filterCuisine">
       <option value="">All Cuisine</option>
     </select>
@@ -32,7 +64,13 @@
   <section id="recipesContainer"></section>
 
   <!-- Show More Button -->
-  <button id="showMoreBtn" style="display:none;">Show More Recipes</button>
+  <button id="showMoreBtn" style="display:none;">
+    <span>Show More Recipes</span>
+    <span class="show-more-icon">⬇️</span>
+  </button>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" class="scroll-top-btn">⬆️</button>
 
   <script src="recipes.js"></script>
 </body>
